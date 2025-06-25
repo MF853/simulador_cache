@@ -102,7 +102,40 @@ A política **LFU** mantém um contador para cada bloco e sempre remove o de men
 
 Seleciona um bloco aleatoriamente para substituição.
 
-## 6. Saída e Resultados
+## 6. Cache Multinível
+
+O simulador agora oferece suporte à simulação de hierarquia de cache multinível (L1, L2 e L3) com as seguintes características:
+
+### 6.1 Configuração Flexível
+
+* Suporte para até 3 níveis de cache (L1, L2, L3)
+* Configuração independente de tamanho, associatividade e política para cada nível
+* Especificação de tempos de acesso para cada nível e para a memória principal (RAM)
+* Ativação/desativação opcional dos níveis L2 e L3
+
+### 6.2 Algoritmos por Nível
+
+Cada nível de cache pode utilizar um algoritmo de substituição diferente:
+* L1 pode usar LRU enquanto L2 usa FIFO, por exemplo
+* Permite estudo do comportamento de diferentes combinações de políticas
+
+### 6.3 Métricas Avançadas
+
+* Taxa de acerto por nível
+* Tempo médio de acesso calculado de acordo com a equação:
+  ```
+  Tmed = p₁·T₁ + p₂·T₂ + p₃·T₃ + pM·TM
+  ```
+  onde `p` é a taxa de acerto, `T` é o tempo de acesso, e os índices indicam os níveis de cache e memória principal
+
+### 6.4 Análise Comparativa
+
+Permite comparar o desempenho entre:
+* Configurações de cache única vs. multinível
+* Diferentes políticas de substituição em cada nível
+* Variações de tamanho de bloco e associatividade
+
+## 7. Saída e Resultados
 
 Ao final da simulação, são apresentados:
 
@@ -114,7 +147,7 @@ Ao final da simulação, são apresentados:
 
 Todos os resultados são exibidos diretamente na interface gráfica.
 
-## 7. Visualização Gráfica (opcional)
+## 8. Visualização Gráfica (opcional)
 
 A função `mapa_temporal_blocos` gera um **heatmap** com:
 
@@ -123,7 +156,7 @@ A função `mapa_temporal_blocos` gera um **heatmap** com:
 
 Essa visualização facilita a identificação de padrões e regiões de maior atividade ao longo do tempo.
 
-## 8. Requisitos
+## 9. Requisitos
 
 * Python 3.x
 * Bibliotecas necessárias:
@@ -135,7 +168,7 @@ Essa visualização facilita a identificação de padrões e regiões de maior a
   * `random`
   * `io`, `base64` (opcional)
 
-## 9. Aplicações Didáticas
+## 10. Aplicações Didáticas
 
 Este simulador pode ser utilizado em disciplinas como:
 
